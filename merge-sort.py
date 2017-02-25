@@ -11,13 +11,8 @@ args = parser.parse_args()
 
 def merge_sort(input_array):
     input_length = len(input_array)
-    if input_length == 1:
+    if input_length < 2:
         return input_array
-    elif input_length == 2:
-        if input_array[0] <= input_array[1]:
-            return input_array
-
-        return [input_array[1], input_array[0]]
     else:
         half_length = input_length / 2
         first_half = input_array[:half_length]
