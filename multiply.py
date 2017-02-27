@@ -32,7 +32,7 @@ def multiply(first, second):
     if n == 1:
         return first * second
 
-    half_n = int(math.ceil(n * 0.5))
+    half_n = n / 2 + n % 2
 
     a = get_int_partitial(first_str[:-half_n])
     b = get_int_partitial(first_str[-half_n:])
@@ -43,7 +43,7 @@ def multiply(first, second):
     bd = multiply(b, d)
     ad_plus_bc = multiply(a + b, c + d) - ac - bd
 
-    return pow(10, n) * ac + pow(10, half_n) * ad_plus_bc + bd
+    return pow(10, 2 * half_n) * ac + pow(10, half_n) * ad_plus_bc + bd
 
 
 def get_int_partitial(str_partitial):
