@@ -27,7 +27,7 @@ def count_inversions(arr):
         return first_inversions + second_inversions + split_inversions
 
 
-# assume that first half and second half are sorted inside
+# assume that first half and second half are sorted inside each other
 def sort_and_count_split_inversions(arr, first_half, second_half):
     first_len = len(first_half)
     second_len = len(second_half)
