@@ -4,7 +4,7 @@ import argparse
 import math
 
 parser = argparse.ArgumentParser(
-    description='Count the number of inversions inside array')
+    description='Multiplies two matrixes with brute force alg')
 parser.add_argument('-l', '--left', type=int, nargs='+', required=True,
                     help='left row-ordered matrix')
 parser.add_argument('-r', '--right', type=int, nargs='+', required=True,
