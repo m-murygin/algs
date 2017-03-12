@@ -4,8 +4,10 @@ import argparse
 
 parser = argparse.ArgumentParser(
     description='Count the number of inversions inside array')
-parser.add_argument('integers', type=int, nargs='+',
+parser.add_argument('--array', type=int, nargs='+',
                     help='an integer array to count')
+parser.add_argument('--file', type=str,
+                    help='file to read integer array')
 args = parser.parse_args()
 
 
@@ -52,7 +54,14 @@ def sort_and_count_split_inversions(arr, first_half, second_half):
 
 
 def main():
-    print count_inversions(args.integers)
+    if args.array:
+        print count_inversions(args.array)
+    elif args.file:
+        file_name = args.file
+        with open(file_name) as f:
+            content = f.readlines()
+        array = [int(x) for x in content]
+        print count_inversions(array)
 
 
 if __name__ == '__main__':
