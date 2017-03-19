@@ -5,8 +5,10 @@ from random import randint
 
 parser = argparse.ArgumentParser(
     description='Sort array with merge sort algorithm')
-parser.add_argument('integers', type=int, nargs='+',
+parser.add_argument('--list', type=int, nargs='+',
                     help='an integer array to sort')
+parser.add_argument('--file', type=str,
+                    help='file to read integer array (one number in a line)')
 args = parser.parse_args()
 
 
@@ -48,7 +50,14 @@ def swap(array, a_index, b_index):
 
 
 def main():
-    print quick_sort(args.integers)
+    if args.list:
+        print quick_sort(args.list)
+    elif args.file:
+        file_name = args.file
+        with open(file_name) as f:
+            content = f.readlines()
+        array = [int(x) for x in content]
+        print quick_sort(array)
 
 
 if __name__ == '__main__':

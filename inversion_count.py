@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument('--array', type=int, nargs='+',
                     help='an integer array to count')
 parser.add_argument('--file', type=str,
-                    help='file to read integer array')
+                    help='file to read integer array (one number on in line)')
 args = parser.parse_args()
 
 
