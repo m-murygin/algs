@@ -27,8 +27,29 @@ class Edge(object):
         self.head = head
         self.tail = tail
 
+    def order(self):
+        if self.head.id > self.tail.id:
+            buf = self.head
+            self.head = self.tail
+            self.tail = buf
+
     def __str__(self):
         return '%s:%s' % (self.head.id, self.tail.id)
+
+    def __eq__(self, other):
+        """Override the default Equals behavior"""
+        if isinstance(other, self.__class__):
+            return self.head.id == other.head.id and \
+                self.tail.id == other.tail.id
+        return False
+
+    def __ne__(self, other):
+        """Define a non-equality test"""
+        return not self.__eq__(other)
+
+    def __hash__(self):
+        """Override the default hash behavior"""
+        return hash(tuple(self.head.id, self.tail.id))
 
 
 def find_min_cut(vertices, edges):
@@ -58,6 +79,7 @@ def find_min_cut(vertices, edges):
                 edge.head = base_vertex
             else:
                 edge.tail = base_vertex
+            edge.order()
 
         vertices.remove(contracted_vertex)
         edges.remove(contracted_edge)
@@ -88,7 +110,10 @@ def parse_input_file(filename):
             for tail_id in line_ints:
                 tail_vertex = vertices[tail_id - 1]
                 edge = Edge(head_vertex, tail_vertex)
-                edges.append(edge)
+                if edge.head.id < edge.tail.id:
+                    edges.append(edge)
+                else:
+                    edge.order()
                 head_vertex.edges.append(edge)
 
     return (vertices, edges)
@@ -98,10 +123,10 @@ def main():
     vertices = parse_result[0]
     edges = parse_result[1]
 
-    # for v in vertices:
-    #     print v
-    # for e in edges:
-    #     print e
+    for v in vertices:
+        print v
+    for e in edges:
+        print e
 
     print find_min_cut(vertices, edges)
 
