@@ -1,14 +1,8 @@
 class Graph:
-    def __init__(self):
-        self.nodes = []
+    def __init__(self, size):
+        self.nodes = [[] for _ in range(size)]
 
     def add_edge(self, i, j, weight):
-        if i not in self.nodes:
-            self.nodes[i] = []
-
-        if j not in self.nodes:
-            self.nodes[j] = []
-
         j_weighted = (j, weight)
         if j_weighted not in self.nodes[i]:
             self.nodes[i].append(j_weighted)
@@ -18,9 +12,18 @@ class Graph:
             self.nodes[j].append(i_weighted)
 
     def print(self):
-        for index in sorted(self.nodes.keys()):
-            print(self.nodes[index])
+        for node in self.nodes:
+            print(node)
 
-    def dijkstra(self, start):
-        pass
+    # def dijkstra(self, start):
+    #     shortes_paths = {}
+    #     # (cur, parent, weight)
+    #     crossing_edges = {}
+    #     crossing_edges[start] = 0
 
+    #     while len(crossing_edges) > 0:
+    #         min_edge = min(crossing_edges, key=lambda t:t[1])
+    #         crossing_edges.remove(min_edge)
+    #         shortes_paths[min_edge] = min_edge[1]
+
+    #         for edge in self.nodes[min_edge]:
