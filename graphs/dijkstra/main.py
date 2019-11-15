@@ -22,6 +22,8 @@ def read_graph(filepath):
 def main():
     filepath = sys.argv[1]
     graph = read_graph(filepath)
+
+    graph.dijkstra(0)
     graph.print()
 
 
