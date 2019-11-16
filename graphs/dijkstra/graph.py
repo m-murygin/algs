@@ -1,4 +1,4 @@
-import math
+MAX_DIST = 1000000
 
 
 class Edge:
@@ -19,7 +19,7 @@ class Edge:
 class Node:
     def __init__(self):
         self.edges = []
-        self.min_path = math.inf
+        self.min_path = MAX_DIST
         self.has_final_path = False
 
     def __lt__(self, other):
@@ -49,12 +49,12 @@ class Graph:
 
     def dijkstra(self, start):
         self.nodes[start].min_path = 0
+        self.nodes[start].has_final_path = True
 
         unprocessed_nodes = []
         for edge in self.nodes[start].edges:
             to_node = self.nodes[edge.to]
             to_node.min_path = edge.weight
-            to_node.has_final_path = True
             unprocessed_nodes.append(to_node)
 
         while len(unprocessed_nodes) > 0:
@@ -70,7 +70,7 @@ class Graph:
                 new_min_path = node.min_path + edge.weight
 
                 # we met this node for the first time
-                if to_node.min_path == math.inf:
+                if to_node.min_path == MAX_DIST:
                     to_node.min_path = new_min_path
                     unprocessed_nodes.append(to_node)
 

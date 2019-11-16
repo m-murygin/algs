@@ -6,8 +6,7 @@ from graph import Graph
 
 def read_graph(filepath):
     with open(filepath) as fp:
-        size = int(fp.readline())
-        graph = Graph(size)
+        graph = Graph(200)
 
         for line in fp:
             node = line.split()
@@ -24,7 +23,12 @@ def main():
     graph = read_graph(filepath)
 
     graph.dijkstra(0)
-    graph.print()
+
+    result = []
+    for i in map(int, "7,37,59,82,99,115,133,165,188,197".split(",")):
+        result.append(str(graph.nodes[i-1].min_path))
+
+    print(",".join(result))
 
 
 if __name__ == "__main__":
