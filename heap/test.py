@@ -21,8 +21,13 @@ def main():
     print(heap)
 
     for i in range(5):
-        heapq.heappop(arr)
-        heap.pop()
+        index = len(arr) // 2
+
+        val = arr[index]
+        heap.delete(val)
+
+        del arr[index]
+        heapq.heapify(arr)
 
     print(arr)
     print(heap)
