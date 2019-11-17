@@ -63,6 +63,9 @@ class Heap:
         return f"[{', '.join(map(str, self.arr))}]"
 
     def __get_parent_index__(self, i):
+        if i == 0:
+            return -1
+
         return i // 2 - (1 if i % 2 == 0 else 0)
 
     def __get_left_child__(self, i):

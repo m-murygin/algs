@@ -22,7 +22,6 @@ def main():
 
     for i in range(5):
         index = len(arr) // 2
-
         val = arr[index]
         heap.delete(val)
 
