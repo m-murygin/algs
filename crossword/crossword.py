@@ -12,8 +12,6 @@ class CrossWord:
         self.words = set(words)
 
     def fill(self):
-        print("start fill")
-        self.print()
         empty_cell = self.get_empty_cell()
 
         if not empty_cell:
@@ -23,7 +21,6 @@ class CrossWord:
 
         while True:
             word = self.get_match_word(gap)
-            print("found word", word)
 
             if not word:
                 return False
@@ -76,6 +73,14 @@ class Gap:
         self.first_empty = first_empty
         self._fill_cells(all_cells)
 
+    def _fill_cells(self, all_cells):
+        if self._is_horizontal(all_cells):
+            cells = self._get_horizontal_cells(all_cells)
+        else:
+            cells = self._get_vertical_cells(all_cells)
+
+        self.cells = cells
+
     def _is_horizontal(self, all_cells):
         row, col = self.first_empty
 
@@ -89,14 +94,6 @@ class Gap:
             return True
 
         return False
-
-    def _fill_cells(self, all_cells):
-        if self._is_horizontal(all_cells):
-            cells = self._get_horizontal_cells(all_cells)
-        else:
-            cells = self._get_vertical_cells(all_cells)
-
-        self.cells = cells
 
     def _get_horizontal_cells(self, all_cells):
         row, col = self.first_empty
@@ -122,18 +119,15 @@ class Gap:
         return list(cells)
 
     def _get_vertical_cells(self, all_cells):
-        print("_get_vertical_cells")
         row, col = self.first_empty
         cells = deque()
         cells.append((row, col))
-        print(cells)
 
         cur_row = row - 1
         while cur_row >= 0:
             if all_cells[cur_row][col] != CrossWord.BLACK_CELL:
                 cells.appendleft((cur_row, col))
                 cur_row -= 1
-                print(cells)
             else:
                 break
 
@@ -142,16 +136,12 @@ class Gap:
             if all_cells[cur_row][col] != CrossWord.BLACK_CELL:
                 cells.append((cur_row, col))
                 cur_row += 1
-                print(cells)
             else:
                 break
 
         return list(cells)
 
     def match(self, cells, word):
-        print("check match")
-        print(word)
-        print(self.cells)
         if word in self.not_matched_words:
             return False
 
@@ -168,7 +158,6 @@ class Gap:
         return True
 
 
-# Complete the crosswordPuzzle function below.
 def crosswordPuzzle(inp_cells, words):
     words = words.split(';')
     cells = [[c for c in row] for row in inp_cells]
